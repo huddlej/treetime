@@ -1,4 +1,4 @@
-from __future__ import print_function, division
+
 from treetime import TreeTime
 import numpy as np
 from scipy import optimize as sciopt

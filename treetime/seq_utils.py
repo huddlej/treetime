@@ -155,7 +155,7 @@ def seq2prof(x, profile_map):
 
      - idx(numpy.array): profile for the character, zero array if the character not found
     """
-    n_states = len(profile_map.values()[0])
+    n_states = len(list(profile_map.values())[0])
     prof = np.array([profile_map[k] if k in profile_map
                     else np.ones(n_states) for k in x ])
 

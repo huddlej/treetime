@@ -1,4 +1,4 @@
-from __future__ import print_function, division
+
 from treetime import TreeAnc
 import numpy as np
 from Bio import Phylo
@@ -11,7 +11,7 @@ if __name__ == '__main__':
     # load data
     base_name = 'data/H3N2_NA_allyears_NA.20'
     T = Phylo.read(base_name+".nwk", "newick")
-    T.root_with_outgroup(T.find_clades(lambda x:x.name.startswith('A/Scot')).next())
+    T.root_with_outgroup(next(T.find_clades(lambda x:x.name.startswith('A/Scot'))))
 
     # instantiate treetime
     myTree = TreeAnc(gtr='Jukes-Cantor', tree = T, aln = base_name+'.fasta', verbose = 0)
@@ -41,7 +41,7 @@ if __name__ == '__main__':
     ax.set_axis_off()
     plt.title
     Phylo.draw(myTree.tree, label_func = lambda x:"", axes=ax,
-        branch_labels=lambda x:", ".join(map(lambda m: "%s%d%s"%m, x.mutations[:3]))
+        branch_labels=lambda x:", ".join(["%s%d%s"%m for m in x.mutations[:3]])
                                +('...' if len(x.mutations)>3 else ""))
 
     # finally, we print the inferred GTR model

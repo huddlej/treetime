@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-from __future__ import print_function, division
+
 import numpy as np
-from treetime import TreeTime
+from .treetime import TreeTime
 from Bio import Phylo, AlignIO
 from Bio import __version__ as bioversion
 
@@ -100,7 +100,7 @@ if __name__=="__main__":
     base_name = '.'.join(params.aln.split('/')[-1].split('.')[:-1])
     # plot
     if params.plot:
-        from treetime.io import plot_vs_years
+        from .treetime.io import plot_vs_years
         import matplotlib.pyplot as plt
         plt.ion()
         leaf_count = myTree.tree.count_terminals()

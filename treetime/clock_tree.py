@@ -1,10 +1,10 @@
-import utils
+from . import utils
 import numpy as np
-import config as ttconf
-from treeanc import TreeAnc
-from distribution import Distribution
-from branch_len_interpolator import BranchLenInterpolator
-from node_interpolator import NodeInterpolator
+from . import config as ttconf
+from .treeanc import TreeAnc
+from .distribution import Distribution
+from .branch_len_interpolator import BranchLenInterpolator
+from .node_interpolator import NodeInterpolator
 import collections
 
 class ClockTree(TreeAnc):

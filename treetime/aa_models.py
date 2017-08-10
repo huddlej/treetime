@@ -1,10 +1,10 @@
-from __future__ import division, print_function
+
 import numpy as np
-from seq_utils import alphabets
+from .seq_utils import alphabets
 
 
 def JTT92(mu=1.0):
-    from gtr import GTR
+    from .gtr import GTR
     # stationary concentrations:
     pis = np.array([
         0.07674789,

@@ -1,7 +1,7 @@
-from __future__ import division, print_function
+
 import numpy as np
 from scipy.interpolate import interp1d
-import config as ttconf
+from . import config as ttconf
 from scipy.integrate import quad
 from scipy import stats
 import datetime
@@ -45,8 +45,8 @@ class DateConversion(object):
 
         if clock_rate is None:
             if len(dates) < 3:
-                raise(RuntimeError("There are to few dates set at the leaves of the tree."
-                    " Cannot make the conversion function. Aborting."))
+                raise RuntimeError("There are to few dates set at the leaves of the tree."
+                    " Cannot make the conversion function. Aborting.")
             # simple regression
             dc.clock_rate,\
                 dc.intercept,\
@@ -103,7 +103,7 @@ def min_interp(interp_object):
     """
     try:
         return interp_object.x[interp_object(interp_object.x).argmin()]
-    except Exception, e:
+    except Exception as e:
         s = "Cannot find minimum of tthe interpolation object" + str(interp_object.x) + \
         "Minimal x: " + str(interp_object.x.min()) + "Maximal x: " + str(interp_object.x.max())
         raise e
@@ -151,4 +151,3 @@ def tree_layout(tree):
 
 if __name__ == '__main__':
     pass
-

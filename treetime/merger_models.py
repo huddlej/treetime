@@ -1,14 +1,14 @@
 """
 methods to calculate merger models for a time tree
 """
-from __future__ import print_function, division
+
 import numpy as np
 import scipy.special as sf
 from scipy.interpolate import interp1d
 from Bio import AlignIO, Phylo
 from scipy.interpolate import interp1d
 from collections import Iterable
-import config as ttconf
+from . import config as ttconf
 
 
 class Coalescent(object):
@@ -65,7 +65,7 @@ class Coalescent(object):
         dn_branch = defaultdict(int)
         for (t, dn) in self.tree_events:
             dn_branch[t]+=dn
-        unique_mergers = np.array(sorted(dn_branch.items(), key = lambda x:-x[0]))
+        unique_mergers = np.array(sorted(list(dn_branch.items()), key = lambda x:-x[0]))
 
         # calculate the branch count at each point summing the delta branch counts
         nbranches = [[ttconf.BIG_NUMBER, 1], [unique_mergers[0,0]+ttconf.TINY_NUMBER, 1]]

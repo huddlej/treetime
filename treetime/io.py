@@ -1,6 +1,6 @@
 from Bio import Phylo
 import numpy as np
-import utils
+from . import utils
 
 
 def plot_vs_years(tt, years = 1, ax=None, confidence=None, ticks=True, **kwargs):
@@ -32,7 +32,7 @@ def plot_vs_years(tt, years = 1, ax=None, confidence=None, ticks=True, **kwargs)
     shift = offset - dtick*(offset//dtick)
     tick_vals = [x+offset-shift for x in xticks]
     ax.set_xticks(xticks - shift)
-    ax.set_xticklabels(map(str, tick_vals))
+    ax.set_xticklabels(list(map(str, tick_vals)))
     ax.set_xlabel('year')
     ax.set_ylabel('')
     ax.set_xlim((0,np.max([n.numdate for n in tt.tree.get_terminals()])+2-offset))

@@ -5,7 +5,7 @@ West Africa. This example contains more than 300 sequences, it will take
 a few minutes to run.
 '''
 
-from __future__ import print_function, division
+
 from treetime import TreeTime
 import numpy as np
 from scipy import optimize as sciopt

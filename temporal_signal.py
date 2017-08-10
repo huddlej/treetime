@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-from __future__ import print_function, division
+
 import numpy as np
-from treetime import TreeTime
-from treetime.utils import DateConversion
+from .treetime import TreeTime
+from .treetime.utils import DateConversion
 from Bio import Phylo, AlignIO
 
 if __name__=="__main__":
@@ -78,7 +78,7 @@ if __name__=="__main__":
     if params.plot:
         import matplotlib.pyplot as plt
         myTree.plot_root_to_tip(label=False)
-        t = np.array([np.min(dates.values()), np.max(dates.values())])
+        t = np.array([np.min(list(dates.values())), np.max(list(dates.values()))])
         plt.plot(t, t*d2d.clock_rate+d2d.intercept,
                  label='y=%1.4f+%1.5ft, r^2=%1.2f'%(d2d.intercept, d2d.clock_rate, d2d.r_val**2))
         plt.legend(loc=2)

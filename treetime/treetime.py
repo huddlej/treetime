@@ -1,11 +1,11 @@
-from __future__ import print_function, division
-from clock_tree import ClockTree
-from utils import *
-import config as ttconf
-import io as tt_io
+
+from .clock_tree import ClockTree
+from .utils import *
+from . import config as ttconf
+from . import io as tt_io
 import numpy as np
 from scipy import optimize as sciopt
-from version import tt_version as __version__
+from .version import tt_version as __version__
 
 
 class TreeTime(ClockTree):
@@ -66,7 +66,7 @@ class TreeTime(ClockTree):
             self.logger("###TreeTime.run: ITERATION %d out of %d iterations"%(niter+1,max_iter),0)
             # add coalescent prior
             if Tc and (Tc is not None):
-                from merger_models import Coalescent
+                from .merger_models import Coalescent
                 self.logger('TreeTime.run: adding coalescent prior with Tc='+str(Tc),1)
                 self.merger_model = Coalescent(self.tree, Tc=avg_root_to_tip,
                                                date2dist=self.date2dist, logger=self.logger)
@@ -155,9 +155,9 @@ class TreeTime(ClockTree):
         for node in terminals:
             if hasattr(node, 'numdate_given') and  (node.numdate_given is not None):
                 res[node] = node.dist2root - clock_rate*np.mean(node.numdate_given) - icpt
-        residuals = np.array(res.values())
+        residuals = np.array(list(res.values()))
         iqd = np.percentile(residuals,75) - np.percentile(residuals,25)
-        for node,r in res.iteritems():
+        for node,r in res.items():
             if abs(r)>n_iqd*iqd and node.up.up is not None:
                 self.logger('TreeTime.ClockFilter: marking %s as outlier, residual %f interquartile distances'%(node.name,r/iqd), 3)
                 node.bad_branch=True
@@ -279,7 +279,7 @@ class TreeTime(ClockTree):
         introduction of the new branch with zero optimal length.
         """
 
-        from branch_len_interpolator import BranchLenInterpolator
+        from .branch_len_interpolator import BranchLenInterpolator
         from Bio import Phylo
 
         zero_branch_slope = self.gtr.mu*self.seq_len
@@ -652,7 +652,7 @@ if __name__=="__main__":
     plt.ion()
     base_name = 'data/H3N2_NA_allyears_NA.200'
     import datetime
-    from utils import numeric_date
+    from .utils import numeric_date
     with open(base_name+'.metadata.csv') as date_file:
         dates = {}
         for line in date_file:
