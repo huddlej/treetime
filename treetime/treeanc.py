@@ -1,4 +1,5 @@
 from __future__ import print_function, division, absolute_import
+from builtins import str
 import time
 from  treetime import config as ttconf
 from Bio import Phylo
@@ -188,10 +189,9 @@ class TreeAnc(object):
            Refer to the particular GTR models for the exact parameter values
 
         """
-        if type(in_gtr)==str:
+        if isinstance(in_gtr, str):
             self._gtr = GTR.standard(model=in_gtr, **kwargs)
             self._gtr.logger = self.logger
-
         elif isinstance(in_gtr, GTR):
             self._gtr = in_gtr
             self._gtr.logger=self.logger
@@ -220,7 +220,7 @@ class TreeAnc(object):
         from os.path import isfile
         if isinstance(in_tree, Phylo.BaseTree.Tree):
             self._tree = in_tree
-        elif type(in_tree)==str and isfile(in_tree):
+        elif isinstance(in_tree, str) and isfile(in_tree):
             try:
                 self._tree=Phylo.read(in_tree, 'newick')
             except:
